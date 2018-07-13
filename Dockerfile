@@ -28,7 +28,7 @@ ENV ANDROID_HOME=/opt/android/android-sdk-tools
 ENV PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 
 RUN mkdir -p $ANDROID_HOME/licenses && echo -e "\nd56f5187479451eabf01fb78af6dfcb131a6481e" > $ANDROID_HOME/licenses/android-sdk-license
-RUN sdkmanager "platform-tools" "platforms;android-28"
+RUN sdkmanager "platform-tools" "platforms;android-26" "platforms;android-27" "platforms;android-28"
 
 # drop back to the regular jenkins user - good practice
 USER jenkins
