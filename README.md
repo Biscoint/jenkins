@@ -1,2 +1,3 @@
-# jenkins
-backup of jenkins configurations
+# Jenkins Meteor
+
+A Jenkins docker image prepared for building meteor applications.
