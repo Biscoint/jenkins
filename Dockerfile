@@ -1,5 +1,4 @@
-FROM jenkins/jenkins:2.133
-
+FROM jenkins/jenkins:lts
 USER root
 COPY jenkins-plugins.txt /usr/share/jenkins/ref/plugins.txt
 #RUN mkdir -p /usr/share/jenkins/ref/plugins/ && /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
@@ -7,7 +6,7 @@ COPY jenkins-plugins.txt /usr/share/jenkins/ref/plugins.txt
 # install docker engine
 
 RUN apt-get update
-RUN apt-get install -y apt-transport-https dirmngr unzip gradle
+RUN apt-get install -y apt-transport-https dirmngr unzip gradle build-essential
 RUN echo 'deb https://apt.dockerproject.org/repo debian-stretch main' >> /etc/apt/sources.list
 #RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys F76221572C52609D
 RUN apt-get update
