@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:lts
+FROM jenkins/jenkins:2.138
 USER root
 COPY jenkins-plugins.txt /usr/share/jenkins/ref/plugins.txt
 #RUN mkdir -p /usr/share/jenkins/ref/plugins/ && /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
