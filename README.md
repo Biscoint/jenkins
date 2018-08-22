@@ -12,7 +12,7 @@ Example of Jenkins Pipeline script commands that a Jenkins Job could use for bui
   }
   
   stage('Sign APK') {
-    withCredentials([string(credentialsId: 'biscoint-jks-passphrase', variable: 'JKSPASS')]) {
+    withCredentials([string(credentialsId: 'android-jks-passphrase', variable: 'JKSPASS')]) {
       sh "jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore /opt/apk-keystore.jks -storepass '${JKSPASS}' -keypass '${JKSPASS}' ${env.WORKSPACE}/build/android/project/build/outputs/apk/release/android-release-unsigned.apk ${CERTNAME}"
       sh "mkdir -p $JENKINS_HOME/releases/apk"
       sh "zipalign 4 ${env.WORKSPACE}/build/android/project/build/outputs/apk/release/android-release-unsigned.apk $JENKINS_HOME/releases/apk/android-release-signed-${env.BUILD_NUMBER}.apk"
