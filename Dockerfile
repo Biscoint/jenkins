@@ -13,6 +13,12 @@ RUN apt-get update
 RUN apt-get install -y --allow-unauthenticated docker-engine
 RUN usermod -aG docker root && usermod -aG docker jenkins
 
+# install kubectl
+RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+RUN echo 'deb https://apt.kubernetes.io/ kubernetes-xenial main' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+RUN apt-get update
+RUN apt-get install -y kubectl
+
 # install meteor
 RUN curl https://install.meteor.com/ | sh
 
