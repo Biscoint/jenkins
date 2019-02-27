@@ -1,7 +1,8 @@
-FROM jenkins/jenkins:2.156
-USER root
+FROM jenkins/jenkins:lts
 COPY jenkins-plugins.txt /usr/share/jenkins/ref/plugins.txt
-#RUN mkdir -p /usr/share/jenkins/ref/plugins/ && /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
+
+USER root
 
 # install docker engine
 
@@ -34,7 +35,8 @@ ENV BUILD_TOOLS_VERSION="28.0.1"
 ENV PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/$BUILD_TOOLS_VERSION
 
 RUN mkdir -p $ANDROID_HOME/licenses && echo -e "\nd56f5187479451eabf01fb78af6dfcb131a6481e" > $ANDROID_HOME/licenses/android-sdk-license
-RUN sdkmanager "platform-tools" "platforms;android-26" "build-tools;$BUILD_TOOLS_VERSION"
+RUN yes | sdkmanager "platform-tools" "platforms;android-26" "build-tools;$BUILD_TOOLS_VERSION"
+RUN ls $ANDROID_HOME/tools $ANDROID_HOME/platform-tools $ANDROID_HOME/build-tools
 
 RUN chown -R 1000:1000 $ANDROID_HOME
 
