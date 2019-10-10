@@ -34,7 +34,7 @@ ENV BUILD_TOOLS_VERSION="28.0.1"
 ENV PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/$BUILD_TOOLS_VERSION
 
 RUN mkdir -p $ANDROID_HOME/licenses && echo -e "\nd56f5187479451eabf01fb78af6dfcb131a6481e" > $ANDROID_HOME/licenses/android-sdk-license
-RUN yes | sdkmanager "platform-tools" "platforms;android-26" "build-tools;$BUILD_TOOLS_VERSION"
+RUN yes | sdkmanager "platform-tools" "platforms;android-28" "build-tools;$BUILD_TOOLS_VERSION"
 RUN ls $ANDROID_HOME/tools $ANDROID_HOME/platform-tools $ANDROID_HOME/build-tools
 
 RUN chown -R 1000:1000 $ANDROID_HOME

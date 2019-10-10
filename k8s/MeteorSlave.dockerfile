@@ -6,7 +6,11 @@ ENV HOME /root
 # install and update debian packages
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install -y wget curl apt-transport-https dirmngr unzip gradle build-essential apt-utils
+RUN apt-get install -y wget curl apt-transport-https dirmngr unzip gradle build-essential apt-utils git
+
+# create unused group so docker is number 998
+RUN groupadd -g 999 notuseful
+RUN groupadd -g 998 docker
 
 # install docker engine
 # RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys F76221572C52609D

@@ -1,0 +1,5 @@
+- mount /data/master/jenkins_home/ from host to /var/jenkins_home of jenkins master
+- mount /var/run/docker.sock from host to /var/run/docker.sock on jenkins slave
+- mount /data/slaves/cache/.npm from host to /home/jenkins/.npm of jenkins slave
+- mount /data/slaves/cache/.meteor from host to /home/jenkins/.meteor of jenkins slave
+- mount /data/slaves/cache/.gradle from host to /home/jenkins/.gradle of jenkins slave
