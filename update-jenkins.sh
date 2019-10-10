@@ -1,6 +1,6 @@
 git pull origin master
 
-docker pull jonathascarrijo/jenkins-meteor:latest
+docker pull biscoint/jenkins-meteor:latest
 
 ./rm_jenkins.sh
 

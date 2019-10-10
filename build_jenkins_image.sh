@@ -1,2 +1,2 @@
-docker build -t jonathascarrijo/jenkins-meteor:latest .
-#docker tag -t jonathascarrijo/jenkins-meteor:latest jonathascarrijo/jenkins:2.133
+docker build -t biscoint/jenkins-meteor:latest .
+#docker tag -t biscoint/jenkins-meteor:latest biscoint/jenkins:2.133
