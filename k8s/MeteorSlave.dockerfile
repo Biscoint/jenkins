@@ -3,14 +3,14 @@ FROM jenkins/jnlp-slave
 USER root
 ENV HOME /root
 
-# install and update debian packages
-RUN apt-get update
-RUN apt-get upgrade -y
-RUN apt-get install -y wget curl apt-transport-https dirmngr unzip gradle build-essential apt-utils git
-
 # create unused group so docker is number 998
 RUN groupadd -g 999 notuseful
 RUN groupadd -g 998 docker
+
+# install and update debian packages (for testing and more)
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install -y wget curl apt-transport-https dirmngr unzip gradle build-essential apt-utils git vim netcat telnet libgconf-2-4 libpangocairo-1.0-0 libdbus-1-dev libgtk-3-dev libnotify-dev libgnome-keyring-dev libasound2-dev libcap-dev libcups2-dev libxtst-dev libxss1 libnss3-dev xvfb
 
 # install docker engine
 # RUN apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys F76221572C52609D
@@ -18,6 +18,10 @@ RUN echo 'deb https://apt.dockerproject.org/repo debian-stretch main' >> /etc/ap
 RUN apt-get update
 RUN apt-get install -y --allow-unauthenticated docker-engine
 RUN usermod -aG docker root && usermod -aG docker jenkins
+
+# add docker-compose
+RUN curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
 
 # install kubectl
 RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
