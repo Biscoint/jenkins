@@ -23,12 +23,6 @@ RUN usermod -aG docker root && usermod -aG docker jenkins
 RUN curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 RUN chmod +x /usr/local/bin/docker-compose
 
-# install kubectl
-RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-RUN echo 'deb https://apt.kubernetes.io/ kubernetes-stretch main' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
-RUN apt-get update
-RUN apt-get install -y kubectl
-
 # install Android tools
 RUN mkdir /opt/android/ && cd /opt/android && wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
 RUN unzip /opt/android/sdk-tools-linux-4333796.zip -d /opt/android/android-sdk-tools && rm /opt/android/sdk-tools-linux-4333796.zip
@@ -45,6 +39,13 @@ RUN ls -la $ANDROID_HOME/tools $ANDROID_HOME/platform-tools $ANDROID_HOME/build-
 
 # install meteor
 RUN curl https://install.meteor.com/ | sh
+
+# install kubectl
+# RUN curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+# RUN echo 'deb https://apt.kubernetes.io/ kubernetes-stretch main' | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+# RUN apt-get update
+# RUN apt-get install -y kubectl
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl && chmod +x ./kubectl && mv ./kubectl /usr/local/bin/kubectl && kubectl version --client
 
 USER jenkins
 ENV HOME /home/jenkins
